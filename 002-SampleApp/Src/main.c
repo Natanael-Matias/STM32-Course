@@ -27,6 +27,7 @@ void ArrayFillNumbers(int pNumbers[], unsigned int len){
 	for(int i = 0; i < len; i++){
 		pNumbers[i] = rand() % 1000;
 	}
+	someData = 5;
 }
 
 void DisplayNumbers(int *pNumbers, unsigned int len, char *pMessage){

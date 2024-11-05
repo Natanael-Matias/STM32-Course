@@ -27,12 +27,12 @@
 #define GPIOx_AFRH_OFFSET				0x24
 
 #define GPIOA_BASE_ADDR					0x40020000
-#define GPIOA_MODE_REG					*((volatile uint32_t *) GPIOA_BASE_ADDR)
+#define GPIOA_MODER_REG					*((volatile uint32_t *) GPIOA_BASE_ADDR)
 #define GPIOA_AFRH_ADDR					(GPIOA_BASE_ADDR + GPIOx_AFRH_OFFSET)
 #define GPIOA_AFRH_REG					*((volatile uint32_t *) GPIOA_AFRH_ADDR)
 
 #define GPIOA_EN()						RCC_AHB1ENR_REG |= (1 << 0)
-#define GPIOA_SET_MODE(pin, mode)		GPIOA_MODE_REG |= (mode << (pin*2)) // pin: 0 .. 15
+#define GPIOA_SET_MODE(pin, mode)		GPIOA_MODER_REG |= (mode << (pin*2)) // pin: 0 .. 15
 #define GPIOA_SEL_AF0()					GPIOA_AFRH_REG |= (0 << 0)
 
 

@@ -29,25 +29,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  12 .ARM.attributes 00000030  00000000  00000000  00002004  2**0
                   CONTENTS, READONLY
- 13 .debug_info   0000010c  00000000  00000000  00002034  2**0
+ 13 .debug_info   00000199  00000000  00000000  00002034  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 000000b8  00000000  00000000  00002140  2**0
+ 14 .debug_abbrev 0000010a  00000000  00000000  000021cd  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00000058  00000000  00000000  000021f8  2**3
+ 15 .debug_aranges 00000070  00000000  00000000  000022d8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 00000039  00000000  00000000  00002250  2**0
+ 16 .debug_rnglists 00000046  00000000  00000000  00002348  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  0000101e  00000000  00000000  00002289  2**0
+ 17 .debug_macro  00001173  00000000  00000000  0000238e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   000004fd  00000000  00000000  000032a7  2**0
+ 18 .debug_line   00000934  00000000  00000000  00003501  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000040fe  00000000  00000000  000037a4  2**0
+ 19 .debug_str    00004126  00000000  00000000  00003e35  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  000078a2  2**0
+ 20 .comment      00000043  00000000  00000000  00007f5b  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00000098  00000000  00000000  000078e8  2**2
+ 21 .debug_frame  000000a8  00000000  00000000  00007fa0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 0000007d  00000000  00000000  00007980  2**0
+ 22 .debug_line_str 0000007d  00000000  00000000  00008048  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -80,125 +80,129 @@ Disassembly of section .text:
  80001e4:	20000008 	.word	0x20000008
  80001e8:	0800035c 	.word	0x0800035c
 
-080001ec <main>:
+080001ec <EXTI0_IRQHandler>:
+ *      Author: Natanael.matias
+ */
+
+#include "Interrupt.h"
+
+void EXTI0_IRQHandler(void) {
+ 80001ec:	b480      	push	{r7}
+ 80001ee:	af00      	add	r7, sp, #0
+	EXTI_PR_REG |= (1 << 0);
+ 80001f0:	4b05      	ldr	r3, [pc, #20]	@ (8000208 <EXTI0_IRQHandler+0x1c>)
+ 80001f2:	681b      	ldr	r3, [r3, #0]
+ 80001f4:	4a04      	ldr	r2, [pc, #16]	@ (8000208 <EXTI0_IRQHandler+0x1c>)
+ 80001f6:	f043 0301 	orr.w	r3, r3, #1
+ 80001fa:	6013      	str	r3, [r2, #0]
+}
+ 80001fc:	bf00      	nop
+ 80001fe:	46bd      	mov	sp, r7
+ 8000200:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000204:	4770      	bx	lr
+ 8000206:	bf00      	nop
+ 8000208:	40013c14 	.word	0x40013c14
+
+0800020c <main>:
 void WaitHSE_RDY(void);
 
 uint32_t volatile *pNVICIRQEn = (uint32_t*) 0xE000E100;
 
 int main(void)
 {
- 80001ec:	b580      	push	{r7, lr}
- 80001ee:	af00      	add	r7, sp, #0
+ 800020c:	b580      	push	{r7, lr}
+ 800020e:	af00      	add	r7, sp, #0
 	RCC_CR_REG |= (1 << 16); //  HSE oscillator ON
- 80001f0:	4b1a      	ldr	r3, [pc, #104]	@ (800025c <main+0x70>)
- 80001f2:	681b      	ldr	r3, [r3, #0]
- 80001f4:	4a19      	ldr	r2, [pc, #100]	@ (800025c <main+0x70>)
- 80001f6:	f443 3380 	orr.w	r3, r3, #65536	@ 0x10000
- 80001fa:	6013      	str	r3, [r2, #0]
+ 8000210:	4b1a      	ldr	r3, [pc, #104]	@ (800027c <main+0x70>)
+ 8000212:	681b      	ldr	r3, [r3, #0]
+ 8000214:	4a19      	ldr	r2, [pc, #100]	@ (800027c <main+0x70>)
+ 8000216:	f443 3380 	orr.w	r3, r3, #65536	@ 0x10000
+ 800021a:	6013      	str	r3, [r2, #0]
 	WaitHSE_RDY();
- 80001fc:	f000 f83e 	bl	800027c <WaitHSE_RDY>
+ 800021c:	f000 f83e 	bl	800029c <WaitHSE_RDY>
 
 	RCC_CFGR_REG |= (1 << 0); // HSE oscillator selected as system clock
- 8000200:	4b17      	ldr	r3, [pc, #92]	@ (8000260 <main+0x74>)
- 8000202:	681b      	ldr	r3, [r3, #0]
- 8000204:	4a16      	ldr	r2, [pc, #88]	@ (8000260 <main+0x74>)
- 8000206:	f043 0301 	orr.w	r3, r3, #1
- 800020a:	6013      	str	r3, [r2, #0]
+ 8000220:	4b17      	ldr	r3, [pc, #92]	@ (8000280 <main+0x74>)
+ 8000222:	681b      	ldr	r3, [r3, #0]
+ 8000224:	4a16      	ldr	r2, [pc, #88]	@ (8000280 <main+0x74>)
+ 8000226:	f043 0301 	orr.w	r3, r3, #1
+ 800022a:	6013      	str	r3, [r2, #0]
 
 	GPIOA_EN();
- 800020c:	4b15      	ldr	r3, [pc, #84]	@ (8000264 <main+0x78>)
- 800020e:	681b      	ldr	r3, [r3, #0]
- 8000210:	4a14      	ldr	r2, [pc, #80]	@ (8000264 <main+0x78>)
- 8000212:	f043 0301 	orr.w	r3, r3, #1
- 8000216:	6013      	str	r3, [r2, #0]
+ 800022c:	4b15      	ldr	r3, [pc, #84]	@ (8000284 <main+0x78>)
+ 800022e:	681b      	ldr	r3, [r3, #0]
+ 8000230:	4a14      	ldr	r2, [pc, #80]	@ (8000284 <main+0x78>)
+ 8000232:	f043 0301 	orr.w	r3, r3, #1
+ 8000236:	6013      	str	r3, [r2, #0]
 	GPIOA_MODER_REG &= ~(0x3 << 0); // PA0 input mode
- 8000218:	4b13      	ldr	r3, [pc, #76]	@ (8000268 <main+0x7c>)
- 800021a:	681b      	ldr	r3, [r3, #0]
- 800021c:	4a12      	ldr	r2, [pc, #72]	@ (8000268 <main+0x7c>)
- 800021e:	f023 0303 	bic.w	r3, r3, #3
- 8000222:	6013      	str	r3, [r2, #0]
+ 8000238:	4b13      	ldr	r3, [pc, #76]	@ (8000288 <main+0x7c>)
+ 800023a:	681b      	ldr	r3, [r3, #0]
+ 800023c:	4a12      	ldr	r2, [pc, #72]	@ (8000288 <main+0x7c>)
+ 800023e:	f023 0303 	bic.w	r3, r3, #3
+ 8000242:	6013      	str	r3, [r2, #0]
 	RCC_APB2ENR_REG |= (1 << 14); // TODO: Por quê??
- 8000224:	4b11      	ldr	r3, [pc, #68]	@ (800026c <main+0x80>)
- 8000226:	681b      	ldr	r3, [r3, #0]
- 8000228:	4a10      	ldr	r2, [pc, #64]	@ (800026c <main+0x80>)
- 800022a:	f443 4380 	orr.w	r3, r3, #16384	@ 0x4000
- 800022e:	6013      	str	r3, [r2, #0]
+ 8000244:	4b11      	ldr	r3, [pc, #68]	@ (800028c <main+0x80>)
+ 8000246:	681b      	ldr	r3, [r3, #0]
+ 8000248:	4a10      	ldr	r2, [pc, #64]	@ (800028c <main+0x80>)
+ 800024a:	f443 4380 	orr.w	r3, r3, #16384	@ 0x4000
+ 800024e:	6013      	str	r3, [r2, #0]
 
-	EXTI_IMR_REG |= (1 << 8);
- 8000230:	4b0f      	ldr	r3, [pc, #60]	@ (8000270 <main+0x84>)
- 8000232:	681b      	ldr	r3, [r3, #0]
- 8000234:	4a0e      	ldr	r2, [pc, #56]	@ (8000270 <main+0x84>)
- 8000236:	f443 7380 	orr.w	r3, r3, #256	@ 0x100
- 800023a:	6013      	str	r3, [r2, #0]
-	EXTI_RTSR_REG |= (1 << 8);	// Rising trigger enabled
- 800023c:	4b0d      	ldr	r3, [pc, #52]	@ (8000274 <main+0x88>)
- 800023e:	681b      	ldr	r3, [r3, #0]
- 8000240:	4a0c      	ldr	r2, [pc, #48]	@ (8000274 <main+0x88>)
- 8000242:	f443 7380 	orr.w	r3, r3, #256	@ 0x100
- 8000246:	6013      	str	r3, [r2, #0]
+	EXTI_IMR_REG |= (1 << 0);
+ 8000250:	4b0f      	ldr	r3, [pc, #60]	@ (8000290 <main+0x84>)
+ 8000252:	681b      	ldr	r3, [r3, #0]
+ 8000254:	4a0e      	ldr	r2, [pc, #56]	@ (8000290 <main+0x84>)
+ 8000256:	f043 0301 	orr.w	r3, r3, #1
+ 800025a:	6013      	str	r3, [r2, #0]
+	EXTI_RTSR_REG |= (1 << 0);	// Rising trigger enabled
+ 800025c:	4b0d      	ldr	r3, [pc, #52]	@ (8000294 <main+0x88>)
+ 800025e:	681b      	ldr	r3, [r3, #0]
+ 8000260:	4a0c      	ldr	r2, [pc, #48]	@ (8000294 <main+0x88>)
+ 8000262:	f043 0301 	orr.w	r3, r3, #1
+ 8000266:	6013      	str	r3, [r2, #0]
 
-	*pNVICIRQEn |= (1 << 6); // TODO: ????????
- 8000248:	4b0b      	ldr	r3, [pc, #44]	@ (8000278 <main+0x8c>)
- 800024a:	681b      	ldr	r3, [r3, #0]
- 800024c:	681a      	ldr	r2, [r3, #0]
- 800024e:	4b0a      	ldr	r3, [pc, #40]	@ (8000278 <main+0x8c>)
- 8000250:	681b      	ldr	r3, [r3, #0]
- 8000252:	f042 0240 	orr.w	r2, r2, #64	@ 0x40
- 8000256:	601a      	str	r2, [r3, #0]
+	*pNVICIRQEn |= (1 << 6); // Table 62 & 63: Vector table. Position column.
+ 8000268:	4b0b      	ldr	r3, [pc, #44]	@ (8000298 <main+0x8c>)
+ 800026a:	681b      	ldr	r3, [r3, #0]
+ 800026c:	681a      	ldr	r2, [r3, #0]
+ 800026e:	4b0a      	ldr	r3, [pc, #40]	@ (8000298 <main+0x8c>)
+ 8000270:	681b      	ldr	r3, [r3, #0]
+ 8000272:	f042 0240 	orr.w	r2, r2, #64	@ 0x40
+ 8000276:	601a      	str	r2, [r3, #0]
 
     /* Loop forever */
 	for(;;);
- 8000258:	bf00      	nop
- 800025a:	e7fd      	b.n	8000258 <main+0x6c>
- 800025c:	40023800 	.word	0x40023800
- 8000260:	40023808 	.word	0x40023808
- 8000264:	40023830 	.word	0x40023830
- 8000268:	40020000 	.word	0x40020000
- 800026c:	40023844 	.word	0x40023844
- 8000270:	40013c00 	.word	0x40013c00
- 8000274:	40013c08 	.word	0x40013c08
- 8000278:	20000000 	.word	0x20000000
+ 8000278:	bf00      	nop
+ 800027a:	e7fd      	b.n	8000278 <main+0x6c>
+ 800027c:	40023800 	.word	0x40023800
+ 8000280:	40023808 	.word	0x40023808
+ 8000284:	40023830 	.word	0x40023830
+ 8000288:	40020000 	.word	0x40020000
+ 800028c:	40023844 	.word	0x40023844
+ 8000290:	40013c00 	.word	0x40013c00
+ 8000294:	40013c08 	.word	0x40013c08
+ 8000298:	20000000 	.word	0x20000000
 
-0800027c <WaitHSE_RDY>:
+0800029c <WaitHSE_RDY>:
 }
 
 void WaitHSE_RDY(void) {
- 800027c:	b480      	push	{r7}
- 800027e:	af00      	add	r7, sp, #0
+ 800029c:	b480      	push	{r7}
+ 800029e:	af00      	add	r7, sp, #0
 	while(!(RCC_CR_REG & (1 << 17)));
- 8000280:	bf00      	nop
- 8000282:	4b06      	ldr	r3, [pc, #24]	@ (800029c <WaitHSE_RDY+0x20>)
- 8000284:	681b      	ldr	r3, [r3, #0]
- 8000286:	f403 3300 	and.w	r3, r3, #131072	@ 0x20000
- 800028a:	2b00      	cmp	r3, #0
- 800028c:	d0f9      	beq.n	8000282 <WaitHSE_RDY+0x6>
+ 80002a0:	bf00      	nop
+ 80002a2:	4b06      	ldr	r3, [pc, #24]	@ (80002bc <WaitHSE_RDY+0x20>)
+ 80002a4:	681b      	ldr	r3, [r3, #0]
+ 80002a6:	f403 3300 	and.w	r3, r3, #131072	@ 0x20000
+ 80002aa:	2b00      	cmp	r3, #0
+ 80002ac:	d0f9      	beq.n	80002a2 <WaitHSE_RDY+0x6>
 }
- 800028e:	bf00      	nop
- 8000290:	bf00      	nop
- 8000292:	46bd      	mov	sp, r7
- 8000294:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000298:	4770      	bx	lr
- 800029a:	bf00      	nop
- 800029c:	40023800 	.word	0x40023800
-
-080002a0 <EXTI9_5_IRQHandler>:
-
-void EXTI9_5_IRQHandler(void) {
- 80002a0:	b480      	push	{r7}
- 80002a2:	af00      	add	r7, sp, #0
-	EXTI_PR_REG |= (1 << 0);
- 80002a4:	4b05      	ldr	r3, [pc, #20]	@ (80002bc <EXTI9_5_IRQHandler+0x1c>)
- 80002a6:	681b      	ldr	r3, [r3, #0]
- 80002a8:	4a04      	ldr	r2, [pc, #16]	@ (80002bc <EXTI9_5_IRQHandler+0x1c>)
- 80002aa:	f043 0301 	orr.w	r3, r3, #1
- 80002ae:	6013      	str	r3, [r2, #0]
-}
+ 80002ae:	bf00      	nop
  80002b0:	bf00      	nop
  80002b2:	46bd      	mov	sp, r7
  80002b4:	f85d 7b04 	ldr.w	r7, [sp], #4
  80002b8:	4770      	bx	lr
  80002ba:	bf00      	nop
- 80002bc:	40013c14 	.word	0x40013c14
+ 80002bc:	40023800 	.word	0x40023800
 
 080002c0 <Reset_Handler>:
 
@@ -277,7 +281,7 @@ LoopFillZerobss:
  80002ee:	f000 f811 	bl	8000314 <__libc_init_array>
 /* Call the application's entry point.*/
   bl main
- 80002f2:	f7ff ff7b 	bl	80001ec <main>
+ 80002f2:	f7ff ff8b 	bl	800020c <main>
 
 080002f6 <LoopForever>:
 

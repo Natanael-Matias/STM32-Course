@@ -1,1 +1,1 @@
-../Src/Interrupt.c:10:6:EXTI0_IRQHandler	4	static
+../Src/Interrupt.c:10:6:EXTI0_IRQHandler	0	static

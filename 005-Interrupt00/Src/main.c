@@ -13,7 +13,7 @@
 
 void WaitHSE_RDY(void);
 
-uint32_t volatile *pNVICIRQEn = (uint32_t*) 0xE000E100;
+uint32_t volatile *pNVICIRQEn = (uint32_t*) 0xE000E100; // programming manual PM0214. Interrupt set-enable register
 
 int main(void)
 {

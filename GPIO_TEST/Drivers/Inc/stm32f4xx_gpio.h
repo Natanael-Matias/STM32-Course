@@ -21,20 +21,35 @@ typedef struct {
 	__IO uint32_t BSRR;
 	__IO uint32_t LCKR;
 	__IO uint32_t AFR[2];
-}GPIO_Reg_Typedef;
+}GPIO_RegTypedef;
 
-#define GPIOA			((GPIO_Reg_Typedef *) GPIOA_ADDR_BASE)
-#define GPIOB			((GPIO_Reg_Typedef *) GPIOB_ADDR_BASE)
-#define GPIOC			((GPIO_Reg_Typedef *) GPIOC_ADDR_BASE)
-#define GPIOD			((GPIO_Reg_Typedef *) GPIOD_ADDR_BASE)
-#define GPIOE			((GPIO_Reg_Typedef *) GPIOE_ADDR_BASE)
-#define GPIOF			((GPIO_Reg_Typedef *) GPIOF_ADDR_BASE)
-#define GPIOG			((GPIO_Reg_Typedef *) GPIOG_ADDR_BASE)
-#define GPIOH			((GPIO_Reg_Typedef *) GPIOH_ADDR_BASE)
-#define GPIOI			((GPIO_Reg_Typedef *) GPIOI_ADDR_BASE)
-#define GPIOJ			((GPIO_Reg_Typedef *) GPIOJ_ADDR_BASE)
-#define GPIOK			((GPIO_Reg_Typedef *) GPIOK_ADDR_BASE)
+typedef enum {
+	gpioA = 0,
+	gpioB,
+	gpioC,
+	gpioD,
+	gpioE,
+	gpioF,
+	gpioG,
+	gpioH,
+	gpioI,
+	gpioJ,
+	gpioK
+}GPIOx_t;
 
+#define GPIOA			((GPIO_RegTypedef *) GPIOA_ADDR_BASE)
+#define GPIOB			((GPIO_RegTypedef *) GPIOB_ADDR_BASE)
+#define GPIOC			((GPIO_RegTypedef *) GPIOC_ADDR_BASE)
+#define GPIOD			((GPIO_RegTypedef *) GPIOD_ADDR_BASE)
+#define GPIOE			((GPIO_RegTypedef *) GPIOE_ADDR_BASE)
+#define GPIOF			((GPIO_RegTypedef *) GPIOF_ADDR_BASE)
+#define GPIOG			((GPIO_RegTypedef *) GPIOG_ADDR_BASE)
+#define GPIOH			((GPIO_RegTypedef *) GPIOH_ADDR_BASE)
+#define GPIOI			((GPIO_RegTypedef *) GPIOI_ADDR_BASE)
+#define GPIOJ			((GPIO_RegTypedef *) GPIOJ_ADDR_BASE)
+#define GPIOK			((GPIO_RegTypedef *) GPIOK_ADDR_BASE)
 
+#define GPIOx_CLK_EN(gpiox)		(RCC -> AHB1ENR |= (0x01U << gpiox))	/* Clock enable for GPIOx, x = A, ..., J,K */
+#define GPIOx_CLK_DI(gpiox)		(RCC -> AHB1ENR &= ~(0x01U << gpiox))	/* Clock disable for GPIOx, x = A, ..., J,K */
 
 #endif /* INC_STM32F4XX_GPIO_H_ */

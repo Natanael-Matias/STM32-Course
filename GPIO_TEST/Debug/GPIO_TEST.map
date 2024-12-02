@@ -54,6 +54,14 @@ Discarded input sections
  .ARM.attributes
                 0x00000000       0x20 C:/ST/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
  .group         0x00000000        0xc ./Src/main.o
+ .group         0x00000000        0xc ./Src/main.o
+ .group         0x00000000        0xc ./Src/main.o
+ .group         0x00000000        0xc ./Src/main.o
+ .group         0x00000000        0xc ./Src/main.o
+ .group         0x00000000        0xc ./Src/main.o
+ .group         0x00000000        0xc ./Src/main.o
+ .group         0x00000000        0xc ./Src/main.o
+ .group         0x00000000        0xc ./Src/main.o
  .text          0x00000000        0x0 ./Src/main.o
  .data          0x00000000        0x0 ./Src/main.o
  .bss           0x00000000        0x0 ./Src/main.o
@@ -187,7 +195,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 ./Src/syscalls.o
  .debug_macro   0x00000000       0xce ./Src/syscalls.o
  .debug_line    0x00000000      0x8ad ./Src/syscalls.o
- .debug_str     0x00000000     0x98be ./Src/syscalls.o
+ .debug_str     0x00000000     0x98cb ./Src/syscalls.o
  .comment       0x00000000       0x44 ./Src/syscalls.o
  .debug_frame   0x00000000      0x2ac ./Src/syscalls.o
  .ARM.attributes
@@ -250,7 +258,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x6a ./Src/sysmem.o
  .debug_macro   0x00000000      0x1df ./Src/sysmem.o
  .debug_line    0x00000000      0x57e ./Src/sysmem.o
- .debug_str     0x00000000     0x60d6 ./Src/sysmem.o
+ .debug_str     0x00000000     0x60e3 ./Src/sysmem.o
  .comment       0x00000000       0x44 ./Src/sysmem.o
  .debug_frame   0x00000000       0x34 ./Src/sysmem.o
  .ARM.attributes
@@ -792,13 +800,13 @@ LOAD C:/ST/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
 LOAD C:/ST/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libm.a
 LOAD C:/ST/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a
 
-.debug_info     0x00000000       0x78
- .debug_info    0x00000000       0x48 ./Src/main.o
- .debug_info    0x00000048       0x30 ./Startup/startup_stm32f427zitx.o
+.debug_info     0x00000000       0xb7
+ .debug_info    0x00000000       0x87 ./Src/main.o
+ .debug_info    0x00000087       0x30 ./Startup/startup_stm32f427zitx.o
 
-.debug_abbrev   0x00000000       0x60
- .debug_abbrev  0x00000000       0x3c ./Src/main.o
- .debug_abbrev  0x0000003c       0x24 ./Startup/startup_stm32f427zitx.o
+.debug_abbrev   0x00000000       0x6b
+ .debug_abbrev  0x00000000       0x47 ./Src/main.o
+ .debug_abbrev  0x00000047       0x24 ./Startup/startup_stm32f427zitx.o
 
 .debug_aranges  0x00000000       0x48
  .debug_aranges
@@ -813,18 +821,26 @@ LOAD C:/ST/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_rnglists
                 0x00000013       0x19 ./Startup/startup_stm32f427zitx.o
 
-.debug_macro    0x00000000      0xad5
- .debug_macro   0x00000000       0x1b ./Src/main.o
- .debug_macro   0x0000001b      0xaba ./Src/main.o
+.debug_macro    0x00000000     0x10de
+ .debug_macro   0x00000000       0x85 ./Src/main.o
+ .debug_macro   0x00000085      0xaba ./Src/main.o
+ .debug_macro   0x00000b3f       0x22 ./Src/main.o
+ .debug_macro   0x00000b61       0x8e ./Src/main.o
+ .debug_macro   0x00000bef       0x51 ./Src/main.o
+ .debug_macro   0x00000c40      0x103 ./Src/main.o
+ .debug_macro   0x00000d43       0x6a ./Src/main.o
+ .debug_macro   0x00000dad      0x1df ./Src/main.o
+ .debug_macro   0x00000f8c      0x100 ./Src/main.o
+ .debug_macro   0x0000108c       0x52 ./Src/main.o
 
-.debug_line     0x00000000      0x11f
- .debug_line    0x00000000       0xa4 ./Src/main.o
- .debug_line    0x000000a4       0x7b ./Startup/startup_stm32f427zitx.o
+.debug_line     0x00000000      0x507
+ .debug_line    0x00000000      0x48c ./Src/main.o
+ .debug_line    0x0000048c       0x7b ./Startup/startup_stm32f427zitx.o
 
-.debug_str      0x00000000     0x2e57
- .debug_str     0x00000000     0x2e18 ./Src/main.o
- .debug_str     0x00002e18       0x3f ./Startup/startup_stm32f427zitx.o
-                                 0x86 (size before relaxing)
+.debug_str      0x00000000     0x4535
+ .debug_str     0x00000000     0x44af ./Src/main.o
+                               0x460a (size before relaxing)
+ .debug_str     0x000044af       0x86 ./Startup/startup_stm32f427zitx.o
 
 .comment        0x00000000       0x43
  .comment       0x00000000       0x43 ./Src/main.o

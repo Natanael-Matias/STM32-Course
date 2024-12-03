@@ -11,27 +11,6 @@
 #include <stdint.h>
 #include "stm32f429xx.h"
 
-typedef struct {
-	__IO uint32_t MODER;
-	__IO uint32_t OTYPER;
-	__IO uint32_t OSPEEDR;
-	__IO uint32_t PUPDR;
-	__IO uint32_t IDR;
-	__IO uint32_t ODR;
-	__IO uint32_t BSRR;
-	__IO uint32_t LCKR;
-	__IO uint32_t AFR[2];
-}GPIO_RegTypedef;
-
-typedef struct {
-	uint8_t pin;
-	uint8_t mode;
-	uint8_t type;
-	uint8_t speed;
-	uint8_t pupd;
-	uint8_t afr;
-} GPIO_Init_t;
-
 typedef enum {
 	gpioA = 0,
 	gpioB,
@@ -90,6 +69,46 @@ typedef enum {
 	push_pull = 0,
 	open_drain
 } GPIO_TYPE_t;
+
+typedef enum {
+	af0 = 0,
+	af1,
+	af2,
+	af3,
+	af4,
+	af5,
+	af6,
+	af7,
+	af8,
+	af9,
+	af10,
+	af11,
+	af12,
+	af13,
+	af14,
+	af15
+} GPIO_AF_t;
+
+typedef struct {
+	__IO uint32_t MODER;
+	__IO uint32_t OTYPER;
+	__IO uint32_t OSPEEDR;
+	__IO uint32_t PUPDR;
+	__IO uint32_t IDR;
+	__IO uint32_t ODR;
+	__IO uint32_t BSRR;
+	__IO uint32_t LCKR;
+	__IO uint32_t AFR[2];
+}GPIO_RegTypedef;
+
+typedef struct {
+	GPIO_Pin_t pin;
+	GPIO_MODE_t mode;
+	GPIO_TYPE_t type;
+	GPIO_SPEED_t speed;
+	GPIO_PUPD_t pupd;
+	GPIO_AF_t alternate;
+} GPIO_Init_t;
 
 #define GPIOA			((GPIO_RegTypedef *) GPIOA_ADDR_BASE)
 #define GPIOB			((GPIO_RegTypedef *) GPIOB_ADDR_BASE)

@@ -37,6 +37,46 @@ typedef enum {
 	gpioK
 }GPIOx_t;
 
+typedef enum {
+	pin0    = 0x0001,
+	pin1    = 0x0002,
+	pin2    = 0x0004,
+	pin3    = 0x0008,
+	pin4    = 0x0010,
+	pin5    = 0x0020,
+	pin6    = 0x0040,
+	pin7    = 0x0080,
+	pin8    = 0x0100,
+	pin9    = 0x0200,
+	pin10   = 0x0400,
+	pin11   = 0x0800,
+	pin12   = 0x1000,
+	pin13   = 0x2000,
+	pin14   = 0x4000,
+	pin15   = 0x8000,
+	pin_all = 0xFFFF
+} GPIO_Pin_t;
+
+typedef enum {
+	input = 0, 			/* Input mode */
+	output,				/* Output mode */
+	alt_function,		/* Alternate function mode */
+	analog				/* Analog mode */
+} GPIO_MODE_t;
+
+typedef enum {
+	low = 0,
+	medium,
+	high,
+	very_high
+} GPIO_SPEED_t;
+
+typedef enum {
+	no_pull = 0,
+	pull_up,
+	pull_down
+} GPIO_PUPD_t;
+
 #define GPIOA			((GPIO_RegTypedef *) GPIOA_ADDR_BASE)
 #define GPIOB			((GPIO_RegTypedef *) GPIOB_ADDR_BASE)
 #define GPIOC			((GPIO_RegTypedef *) GPIOC_ADDR_BASE)

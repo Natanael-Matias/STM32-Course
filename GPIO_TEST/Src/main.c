@@ -16,8 +16,9 @@
  ******************************************************************************
  */
 
-#include <stm32f429xx_gpio.h>
+#include "stm32f429xx_gpio.h"
 #include "stm32f429xx.h"
+#include "main.h"
 
 int main(void)
 {

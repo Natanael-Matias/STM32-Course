@@ -821,26 +821,26 @@ LOAD C:/ST/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_rnglists
                 0x00000013       0x19 ./Startup/startup_stm32f427zitx.o
 
-.debug_macro    0x00000000     0x10de
- .debug_macro   0x00000000       0x85 ./Src/main.o
- .debug_macro   0x00000085      0xaba ./Src/main.o
- .debug_macro   0x00000b3f       0x22 ./Src/main.o
- .debug_macro   0x00000b61       0x8e ./Src/main.o
- .debug_macro   0x00000bef       0x51 ./Src/main.o
- .debug_macro   0x00000c40      0x103 ./Src/main.o
- .debug_macro   0x00000d43       0x6a ./Src/main.o
- .debug_macro   0x00000dad      0x1df ./Src/main.o
- .debug_macro   0x00000f8c      0x100 ./Src/main.o
- .debug_macro   0x0000108c       0x52 ./Src/main.o
+.debug_macro    0x00000000     0x10e8
+ .debug_macro   0x00000000       0x89 ./Src/main.o
+ .debug_macro   0x00000089      0xaba ./Src/main.o
+ .debug_macro   0x00000b43       0x22 ./Src/main.o
+ .debug_macro   0x00000b65       0x8e ./Src/main.o
+ .debug_macro   0x00000bf3       0x51 ./Src/main.o
+ .debug_macro   0x00000c44      0x103 ./Src/main.o
+ .debug_macro   0x00000d47       0x6a ./Src/main.o
+ .debug_macro   0x00000db1      0x1df ./Src/main.o
+ .debug_macro   0x00000f90      0x106 ./Src/main.o
+ .debug_macro   0x00001096       0x52 ./Src/main.o
 
-.debug_line     0x00000000      0x507
- .debug_line    0x00000000      0x48c ./Src/main.o
- .debug_line    0x0000048c       0x7b ./Startup/startup_stm32f427zitx.o
+.debug_line     0x00000000      0x513
+ .debug_line    0x00000000      0x498 ./Src/main.o
+ .debug_line    0x00000498       0x7b ./Startup/startup_stm32f427zitx.o
 
-.debug_str      0x00000000     0x4535
- .debug_str     0x00000000     0x44af ./Src/main.o
-                               0x460a (size before relaxing)
- .debug_str     0x000044af       0x86 ./Startup/startup_stm32f427zitx.o
+.debug_str      0x00000000     0x450d
+ .debug_str     0x00000000     0x4487 ./Src/main.o
+                               0x45e2 (size before relaxing)
+ .debug_str     0x00004487       0x86 ./Startup/startup_stm32f427zitx.o
 
 .comment        0x00000000       0x43
  .comment       0x00000000       0x43 ./Src/main.o

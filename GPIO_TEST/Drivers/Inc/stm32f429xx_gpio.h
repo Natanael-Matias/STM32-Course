@@ -10,20 +10,21 @@
 
 #include <stdint.h>
 #include "stm32f429xx.h"
+#include "main.h"
 
 typedef enum {
-	gpioA = 0,
-	gpioB,
-	gpioC,
-	gpioD,
-	gpioE,
-	gpioF,
-	gpioG,
-	gpioH,
-	gpioI,
-	gpioJ,
-	gpioK
-}GPIOx_t;
+	gpioa = 0,
+	gpiob,
+	gpioc,
+	gpiod,
+	gpioe,
+	gpiof,
+	gpiog,
+	gpioh,
+	gpioi,
+	gpioj,
+	gpiok
+}GPIO_Port_t;
 
 typedef enum {
 	pin0    = (uint16_t)0x0001,
@@ -99,40 +100,43 @@ typedef struct {
 	__IO uint32_t BSRR;
 	__IO uint32_t LCKR;
 	__IO uint32_t AFR[2];
-}GPIO_RegTypedef;
+}GPIO_Reg_t;
 
 typedef struct {
-	GPIO_Pin_t pin;
-	GPIO_MODE_t mode;
-	GPIO_TYPE_t type;
-	GPIO_SPEED_t speed;
-	GPIO_PUPD_t pupd;
-	GPIO_AF_t alternate;
+	GPIO_Port_t 	port;
+	GPIO_Pin_t 		pin;
+	GPIO_MODE_t 	mode;
+	GPIO_TYPE_t 	type;
+	GPIO_SPEED_t 	speed;
+	GPIO_PUPD_t 	pupd;
+	GPIO_AF_t 		alternate;
 } GPIO_Init_t;
 
-#define GPIOA			((GPIO_RegTypedef *) GPIOA_ADDR_BASE)
-#define GPIOB			((GPIO_RegTypedef *) GPIOB_ADDR_BASE)
-#define GPIOC			((GPIO_RegTypedef *) GPIOC_ADDR_BASE)
-#define GPIOD			((GPIO_RegTypedef *) GPIOD_ADDR_BASE)
-#define GPIOE			((GPIO_RegTypedef *) GPIOE_ADDR_BASE)
-#define GPIOF			((GPIO_RegTypedef *) GPIOF_ADDR_BASE)
-#define GPIOG			((GPIO_RegTypedef *) GPIOG_ADDR_BASE)
-#define GPIOH			((GPIO_RegTypedef *) GPIOH_ADDR_BASE)
-#define GPIOI			((GPIO_RegTypedef *) GPIOI_ADDR_BASE)
-#define GPIOJ			((GPIO_RegTypedef *) GPIOJ_ADDR_BASE)
-#define GPIOK			((GPIO_RegTypedef *) GPIOK_ADDR_BASE)
+#define GPIO_PORTA			((GPIO_Reg_t *) GPIOA_ADDR_BASE)
+#define GPIO_PORTB			((GPIO_Reg_t *) GPIOB_ADDR_BASE)
+#define GPIO_PORTC			((GPIO_Reg_t *) GPIOC_ADDR_BASE)
+#define GPIO_PORTD			((GPIO_Reg_t *) GPIOD_ADDR_BASE)
+#define GPIO_PORTE			((GPIO_Reg_t *) GPIOE_ADDR_BASE)
+#define GPIO_PORTF			((GPIO_Reg_t *) GPIOF_ADDR_BASE)
+#define GPIO_PORTG			((GPIO_Reg_t *) GPIOG_ADDR_BASE)
+#define GPIO_PORTH			((GPIO_Reg_t *) GPIOH_ADDR_BASE)
+#define GPIO_PORTI			((GPIO_Reg_t *) GPIOI_ADDR_BASE)
+#define GPIO_PORTJ			((GPIO_Reg_t *) GPIOJ_ADDR_BASE)
+#define GPIO_PORTK			((GPIO_Reg_t *) GPIOK_ADDR_BASE)
 
 #define GPIOx_CLK_EN(gpiox)		(RCC -> AHB1ENR |= (0x01U << gpiox))	/* Clock enable for GPIOx, x = A, ..., J,K */
 #define GPIOx_CLK_DI(gpiox)		(RCC -> AHB1ENR &= ~(0x01U << gpiox))	/* Clock disable for GPIOx, x = A, ..., J,K */
 
-void GPIO_Init(GPIO_RegTypedef *pGPIOx);
-void GPIO_DeInit(GPIO_RegTypedef *pGPIOx);
-void GPIO_ReadPin(GPIO_RegTypedef *pGPIOx);
-void GPIO_ReadPort(GPIO_RegTypedef *pGPIOx);
-void GPIO_WritePin(GPIO_RegTypedef *pGPIOx);
-void GPIO_WritePort(GPIO_RegTypedef *pGPIOx);
-void GPIO_TogglePin(GPIO_RegTypedef *pGPIOx);
-void GPIO_IRQConfig(GPIO_RegTypedef *pGPIOx);
-void GPIO_IRQHandle(GPIO_RegTypedef *pGPIOx);
+void GPIO_Init(GPIO_Reg_t *pGPIOx, GPIO_Init_t *pGPIO_Init);
+void GPIO_DeInit(GPIO_Reg_t *pGPIOx);
+
+bool_t GPIO_ReadPin(GPIO_Reg_t *pGPIOx, uint8_t pinNumber);
+uint16_t GPIO_ReadPort(GPIO_Reg_t *pGPIOx);
+void GPIO_WritePin(GPIO_Reg_t *pGPIOx, uint8_t pinNumber, bool_t pinValue);
+void GPIO_WritePort(GPIO_Reg_t *pGPIOx, uint16_t portValue);
+void GPIO_TogglePin(GPIO_Reg_t *pGPIOx, uint8_t pinNumber);
+
+void GPIO_IRQConfig(GPIO_Reg_t *pGPIOx);
+void GPIO_IRQHandle(GPIO_Reg_t *pGPIOx);
 
 #endif /* INC_STM32F429XX_GPIO_H_ */

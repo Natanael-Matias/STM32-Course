@@ -103,7 +103,6 @@ typedef struct {
 }GPIO_Reg_t;
 
 typedef struct {
-	GPIO_Port_t 	port;
 	GPIO_Pin_t 		pin;
 	GPIO_MODE_t 	mode;
 	GPIO_TYPE_t 	type;
@@ -127,7 +126,7 @@ typedef struct {
 #define GPIOx_CLK_EN(gpiox)		(RCC -> AHB1ENR |= (0x01U << gpiox))	/* Clock enable for GPIOx, x = A, ..., J,K */
 #define GPIOx_CLK_DI(gpiox)		(RCC -> AHB1ENR &= ~(0x01U << gpiox))	/* Clock disable for GPIOx, x = A, ..., J,K */
 
-void GPIO_Init(GPIO_Reg_t *pGPIOx, GPIO_Init_t *pGPIO_Init);
+void GPIO_Init(GPIO_Reg_t *pGPIOx, GPIO_Init_t pGPIO_Init);
 void GPIO_DeInit(GPIO_Reg_t *pGPIOx);
 
 bool_t GPIO_ReadPin(GPIO_Reg_t *pGPIOx, uint8_t pinNumber);
@@ -138,5 +137,7 @@ void GPIO_TogglePin(GPIO_Reg_t *pGPIOx, uint8_t pinNumber);
 
 void GPIO_IRQConfig(GPIO_Reg_t *pGPIOx);
 void GPIO_IRQHandle(GPIO_Reg_t *pGPIOx);
+
+uint8_t SelectPin(uint16_t *x);
 
 #endif /* INC_STM32F429XX_GPIO_H_ */

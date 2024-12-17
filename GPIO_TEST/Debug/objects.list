@@ -1,3 +1,4 @@
+"./Drivers/Src/stm32f429xx_gpio.o"
 "./Src/main.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"

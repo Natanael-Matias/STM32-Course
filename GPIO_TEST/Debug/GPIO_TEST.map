@@ -66,27 +66,27 @@ Discarded input sections
  .data          0x00000000        0x0 ./Drivers/Src/stm32f429xx_gpio.o
  .bss           0x00000000        0x0 ./Drivers/Src/stm32f429xx_gpio.o
  .text.GPIO_Init
-                0x00000000      0x148 ./Drivers/Src/stm32f429xx_gpio.o
+                0x00000000      0x160 ./Drivers/Src/stm32f429xx_gpio.o
  .text.GPIO_DeInit
-                0x00000000       0x14 ./Drivers/Src/stm32f429xx_gpio.o
+                0x00000000       0x44 ./Drivers/Src/stm32f429xx_gpio.o
  .text.GPIO_ReadPin
-                0x00000000       0x1a ./Drivers/Src/stm32f429xx_gpio.o
+                0x00000000       0x38 ./Drivers/Src/stm32f429xx_gpio.o
  .text.GPIO_ReadPort
-                0x00000000       0x16 ./Drivers/Src/stm32f429xx_gpio.o
- .text.GPIO_WritePin
                 0x00000000       0x1c ./Drivers/Src/stm32f429xx_gpio.o
+ .text.GPIO_WritePin
+                0x00000000       0x5c ./Drivers/Src/stm32f429xx_gpio.o
  .text.GPIO_WritePort
-                0x00000000       0x18 ./Drivers/Src/stm32f429xx_gpio.o
+                0x00000000       0x1e ./Drivers/Src/stm32f429xx_gpio.o
  .text.GPIO_TogglePin
-                0x00000000       0x18 ./Drivers/Src/stm32f429xx_gpio.o
+                0x00000000       0x24 ./Drivers/Src/stm32f429xx_gpio.o
  .text.GPIO_IRQConfig
                 0x00000000       0x14 ./Drivers/Src/stm32f429xx_gpio.o
  .text.GPIO_IRQHandle
                 0x00000000       0x14 ./Drivers/Src/stm32f429xx_gpio.o
  .text.SelectPin
                 0x00000000       0x46 ./Drivers/Src/stm32f429xx_gpio.o
- .debug_info    0x00000000      0x579 ./Drivers/Src/stm32f429xx_gpio.o
- .debug_abbrev  0x00000000      0x14c ./Drivers/Src/stm32f429xx_gpio.o
+ .debug_info    0x00000000      0x842 ./Drivers/Src/stm32f429xx_gpio.o
+ .debug_abbrev  0x00000000      0x191 ./Drivers/Src/stm32f429xx_gpio.o
  .debug_aranges
                 0x00000000       0x68 ./Drivers/Src/stm32f429xx_gpio.o
  .debug_rnglists
@@ -100,11 +100,11 @@ Discarded input sections
  .debug_macro   0x00000000       0x6a ./Drivers/Src/stm32f429xx_gpio.o
  .debug_macro   0x00000000      0x1df ./Drivers/Src/stm32f429xx_gpio.o
  .debug_macro   0x00000000      0x106 ./Drivers/Src/stm32f429xx_gpio.o
- .debug_macro   0x00000000       0x52 ./Drivers/Src/stm32f429xx_gpio.o
- .debug_line    0x00000000      0x626 ./Drivers/Src/stm32f429xx_gpio.o
- .debug_str     0x00000000     0x48b0 ./Drivers/Src/stm32f429xx_gpio.o
+ .debug_macro   0x00000000       0x53 ./Drivers/Src/stm32f429xx_gpio.o
+ .debug_line    0x00000000      0x68d ./Drivers/Src/stm32f429xx_gpio.o
+ .debug_str     0x00000000     0x4a68 ./Drivers/Src/stm32f429xx_gpio.o
  .comment       0x00000000       0x44 ./Drivers/Src/stm32f429xx_gpio.o
- .debug_frame   0x00000000      0x19c ./Drivers/Src/stm32f429xx_gpio.o
+ .debug_frame   0x00000000      0x198 ./Drivers/Src/stm32f429xx_gpio.o
  .ARM.attributes
                 0x00000000       0x34 ./Drivers/Src/stm32f429xx_gpio.o
  .group         0x00000000        0xc ./Src/main.o
@@ -127,7 +127,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x6a ./Src/main.o
  .debug_macro   0x00000000      0x1df ./Src/main.o
  .debug_macro   0x00000000      0x106 ./Src/main.o
- .debug_macro   0x00000000       0x52 ./Src/main.o
+ .debug_macro   0x00000000       0x53 ./Src/main.o
  .group         0x00000000        0xc ./Src/syscalls.o
  .group         0x00000000        0xc ./Src/syscalls.o
  .group         0x00000000        0xc ./Src/syscalls.o
@@ -892,10 +892,10 @@ LOAD C:/ST/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_line    0x00000000      0x498 ./Src/main.o
  .debug_line    0x00000498       0x7b ./Startup/startup_stm32f427zitx.o
 
-.debug_str      0x00000000     0x4544
- .debug_str     0x00000000     0x44be ./Src/main.o
-                               0x4619 (size before relaxing)
- .debug_str     0x000044be       0x86 ./Startup/startup_stm32f427zitx.o
+.debug_str      0x00000000     0x457e
+ .debug_str     0x00000000     0x44f8 ./Src/main.o
+                               0x4653 (size before relaxing)
+ .debug_str     0x000044f8       0x86 ./Startup/startup_stm32f427zitx.o
 
 .comment        0x00000000       0x43
  .comment       0x00000000       0x43 ./Src/main.o

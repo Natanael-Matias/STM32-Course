@@ -103,13 +103,14 @@ typedef struct {
 }GPIO_Reg_t;
 
 typedef struct {
+	GPIO_Port_t		port;
 	GPIO_Pin_t 		pin;
 	GPIO_MODE_t 	mode;
 	GPIO_TYPE_t 	type;
 	GPIO_SPEED_t 	speed;
 	GPIO_PUPD_t 	pupd;
 	GPIO_AF_t 		alternate;
-} GPIO_Init_t;
+} GPIO_Config_t;
 
 #define GPIO_PORTA			((GPIO_Reg_t *) GPIOA_ADDR_BASE)
 #define GPIO_PORTB			((GPIO_Reg_t *) GPIOB_ADDR_BASE)
@@ -123,17 +124,20 @@ typedef struct {
 #define GPIO_PORTJ			((GPIO_Reg_t *) GPIOJ_ADDR_BASE)
 #define GPIO_PORTK			((GPIO_Reg_t *) GPIOK_ADDR_BASE)
 
-#define GPIOx_CLK_EN(gpiox)		(RCC -> AHB1ENR |= (0x01U << gpiox))	/* Clock enable for GPIOx, x = A, ..., J,K */
-#define GPIOx_CLK_DI(gpiox)		(RCC -> AHB1ENR &= ~(0x01U << gpiox))	/* Clock disable for GPIOx, x = A, ..., J,K */
+#define GPIO_CLK_EN(gpiox)			(RCC -> AHB1ENR |= (0x01U << gpiox))	/* Clock enable for GPIOx, x = A, ..., J,K */
+#define GPIO_PORT_RESET(gpiox)		do {\
+										RCC -> AHB1RSTR |= (0x01U << gpiox); \
+										RCC -> AHB1RSTR &= ~(0x01U << gpiox);\
+										}while(false)
 
-void GPIO_Init(GPIO_Reg_t *pGPIOx, GPIO_Init_t pGPIO_Init);
-void GPIO_DeInit(GPIO_Reg_t *pGPIOx);
+void GPIO_Init(GPIO_Reg_t *pGPIOx, const GPIO_Config_t *pGPIO_Init);
+void GPIO_DeInit(const GPIO_Config_t *pGPIOx);
 
-bool_t GPIO_ReadPin(GPIO_Reg_t *pGPIOx, uint8_t pinNumber);
+bool_t GPIO_ReadPin(GPIO_Reg_t *pGPIOx, const GPIO_Pin_t *pGPIO_Pin);
 uint16_t GPIO_ReadPort(GPIO_Reg_t *pGPIOx);
-void GPIO_WritePin(GPIO_Reg_t *pGPIOx, uint8_t pinNumber, bool_t pinValue);
+void GPIO_WritePin(GPIO_Reg_t *pGPIOx, const GPIO_Pin_t *pGPIO_Pin, state_t pinValue);
 void GPIO_WritePort(GPIO_Reg_t *pGPIOx, uint16_t portValue);
-void GPIO_TogglePin(GPIO_Reg_t *pGPIOx, uint8_t pinNumber);
+void GPIO_TogglePin(GPIO_Reg_t *pGPIOx, const GPIO_Pin_t *pGPIO_Pin);
 
 void GPIO_IRQConfig(GPIO_Reg_t *pGPIOx);
 void GPIO_IRQHandle(GPIO_Reg_t *pGPIOx);

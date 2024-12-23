@@ -20,22 +20,30 @@
 #include <stm32f42xxx_gpio.h>
 #include "main.h"
 
-void GPIO_Config(void);
+#define LED_RED			pin13
+#define LED_GREEN		pin14
+
+void GPIO_Config(GPIO_Config_t *gpio_config);
 void RCC_Config(void);
 
 int main(void)
 {
-	RCC_Config();
-	GPIO_Config();
-    /* Loop forever */
-	GPIO_WritePin(GPIO_PORTG, pin13, reset);
-	GPIO_WritePin(GPIO_PORTG, pin14, set);
+	GPIO_Config_t gpiog_config;
 
-	for(;;) {
-		for(int i = 0; i < 500; i++)
-			for(int j = 0; j < 500; j++);
-		GPIO_TogglePin(GPIO_PORTG, pin13);
-		GPIO_TogglePin(GPIO_PORTG, pin14);
+	RCC_Config();
+	GPIO_Config(&gpiog_config);
+    /* Loop forever */
+	GPIO_WritePin(GPIO_PORTG, LED_RED, reset);
+	GPIO_WritePin(GPIO_PORTG, LED_GREEN, set);
+
+	while(true) {
+		for(int k = 0; k < 10; k++){
+			for(int i = 0; i < 500; i++)
+				for(int j = 0; j < 500; j++);
+			GPIO_TogglePin(GPIO_PORTG, LED_RED);
+			GPIO_TogglePin(GPIO_PORTG, LED_GREEN);
+		}
+		GPIO_DeInit(&gpiog_config);
 	}
 }
 
@@ -54,12 +62,11 @@ void RCC_Config(void) {
 	cfgr_bits->sw = set;
 }
 
-void GPIO_Config(void) {
-	GPIO_Config_t gpiog_config;
-	gpiog_config.port = gpiog;
-	gpiog_config.pin = pin13|pin14;
-	gpiog_config.mode = output;
-	gpiog_config.type = push_pull;
+void GPIO_Config(GPIO_Config_t *gpio_config) {
+	gpio_config->port = gpiog;
+	gpio_config->pin = pin13|pin14;
+	gpio_config->mode = output;
+	gpio_config->type = push_pull;
 
-	GPIO_Init(GPIO_PORTG, &gpiog_config);
+	GPIO_Init(GPIO_PORTG, gpio_config);
 }

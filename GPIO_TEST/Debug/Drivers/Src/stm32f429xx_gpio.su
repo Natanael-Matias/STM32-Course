@@ -2,7 +2,7 @@
 ../Drivers/Src/stm32f429xx_gpio.c:58:6:GPIO_DeInit	16	static
 ../Drivers/Src/stm32f429xx_gpio.c:62:8:GPIO_ReadPin	32	static
 ../Drivers/Src/stm32f429xx_gpio.c:69:10:GPIO_ReadPort	24	static
-../Drivers/Src/stm32f429xx_gpio.c:75:6:GPIO_WritePin	32	static
+../Drivers/Src/stm32f429xx_gpio.c:75:6:GPIO_WritePin	24	static
 ../Drivers/Src/stm32f429xx_gpio.c:83:6:GPIO_WritePort	16	static
 ../Drivers/Src/stm32f429xx_gpio.c:87:6:GPIO_TogglePin	16	static
 ../Drivers/Src/stm32f429xx_gpio.c:91:6:GPIO_IRQConfig	16	static

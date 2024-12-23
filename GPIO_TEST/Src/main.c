@@ -16,12 +16,50 @@
  ******************************************************************************
  */
 
-#include "stm32f429xx_gpio.h"
-#include "stm32f429xx.h"
+#include <stm32f42xxx.h>
+#include <stm32f42xxx_gpio.h>
 #include "main.h"
+
+void GPIO_Config(void);
+void RCC_Config(void);
 
 int main(void)
 {
+	RCC_Config();
+	GPIO_Config();
     /* Loop forever */
-	for(;;);
+	GPIO_WritePin(GPIO_PORTG, pin13, reset);
+	GPIO_WritePin(GPIO_PORTG, pin14, set);
+
+	for(;;) {
+		for(int i = 0; i < 500; i++)
+			for(int j = 0; j < 500; j++);
+		GPIO_TogglePin(GPIO_PORTG, pin13);
+		GPIO_TogglePin(GPIO_PORTG, pin14);
+	}
+}
+
+void RCC_Config(void) {
+	RCC_CR_Bits *cr_bits;
+	RCC_CFGR_Bits *cfgr_bits;
+
+	cr_bits = (RCC_CR_Bits*) &RCC->CR;
+	cfgr_bits = (RCC_CFGR_Bits *) &RCC->CFGR;
+
+	/* RCC CR modify */
+	cr_bits->hse_on = set;
+
+	while(!(cr_bits->hse_rdy)); /* wait for HSE ready */
+
+	cfgr_bits->sw = set;
+}
+
+void GPIO_Config(void) {
+	GPIO_Config_t gpiog_config;
+	gpiog_config.port = gpiog;
+	gpiog_config.pin = pin13|pin14;
+	gpiog_config.mode = output;
+	gpiog_config.type = push_pull;
+
+	GPIO_Init(GPIO_PORTG, &gpiog_config);
 }

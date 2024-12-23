@@ -5,11 +5,12 @@
  *      Author: Natanael.matias
  */
 
-#ifndef INC_STM32F429XX_GPIO_H_
-#define INC_STM32F429XX_GPIO_H_
+#ifndef INC_STM32F42XXX_GPIO_H_
+#define INC_STM32F42XXX_GPIO_H_
 
 #include <stdint.h>
-#include "stm32f429xx.h"
+#include "stm32f42xxx.h"
+#include "stm32f42xxx_rcc.h"
 #include "main.h"
 
 typedef enum {
@@ -135,13 +136,13 @@ void GPIO_DeInit(const GPIO_Config_t *pGPIOx);
 
 bool_t GPIO_ReadPin(GPIO_Reg_t *pGPIOx, const GPIO_Pin_t *pGPIO_Pin);
 uint16_t GPIO_ReadPort(GPIO_Reg_t *pGPIOx);
-void GPIO_WritePin(GPIO_Reg_t *pGPIOx, const GPIO_Pin_t *pGPIO_Pin, state_t pinValue);
+void GPIO_WritePin(GPIO_Reg_t *pGPIOx, const GPIO_Pin_t GPIO_Pin, state_t pinValue);
 void GPIO_WritePort(GPIO_Reg_t *pGPIOx, uint16_t portValue);
-void GPIO_TogglePin(GPIO_Reg_t *pGPIOx, const GPIO_Pin_t *pGPIO_Pin);
+void GPIO_TogglePin(GPIO_Reg_t *pGPIOx, const GPIO_Pin_t GPIO_Pin);
 
 void GPIO_IRQConfig(GPIO_Reg_t *pGPIOx);
 void GPIO_IRQHandle(GPIO_Reg_t *pGPIOx);
 
 uint8_t SelectPin(uint16_t *x);
 
-#endif /* INC_STM32F429XX_GPIO_H_ */
+#endif /* INC_STM32F42XXX_GPIO_H_ */

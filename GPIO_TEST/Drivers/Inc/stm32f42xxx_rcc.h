@@ -8,7 +8,7 @@
 #ifndef INC_STM32F42XXX_RCC_H_
 #define INC_STM32F42XXX_RCC_H_
 
-#include "stm32f429xx.h"
+#include <stm32f42xxx.h>
 #include "main.h"
 
 /* Struct for RCC registers */
@@ -56,7 +56,7 @@ typedef union __attribute__((packed)) {
 		uint8_t 		hsi_trim:		5; /* Internal high-speed clock trimming */
 		__RO uint8_t 	hsi_cal:		8; /* Internal high-speed clock calibration */
 		bool_t 			hse_on:			1; /* HSE clock enable */
-		__RO bool_t 	hse_rdy:		1; /* HSE clock ready flag */
+		__RO bool_t		hse_rdy:		1; /* HSE clock ready flag */
 		bool_t 			hse_byp:		1; /* HSE clock bypass */
 		bool_t			css_on:			1; /* Clock security system enable */
 		uint8_t			reserved1:		4;
@@ -70,5 +70,23 @@ typedef union __attribute__((packed)) {
 	};
 	uint32_t rcc_cr_all;
 } RCC_CR_Bits;
+
+typedef union __attribute__((packed)) {
+	struct {
+		uint8_t 		sw:			2; /* System clock switch */
+		__RO uint8_t 	sws:		2; /* System clock switch status */
+		uint8_t 		hpre:		4; /* AHB prescaler */
+		uint8_t 		reserved:	2;
+		uint8_t 		ppre1:		3; /* APB Low speed prescaler (APB1) */
+		uint8_t 		ppre2:		3; /* APB high-speed prescaler (APB2) */
+		uint8_t 		rtc_pre:	5; /* HSE division factor for RTC clock */
+		uint8_t			mco1:		2; /* Microcontroller clock output 1 */
+		bool_t			i2s_sc:		1; /* I2S clock selection */
+		uint8_t			mco1_pre:	3; /* MCO1 prescaler */
+		uint8_t			mco2_pre:	3; /* MCO2 prescaler */
+		uint8_t			mco2:		2; /* Microcontroller clock output 2 */
+	};
+	uint32_t rcc_cfgr_all;
+} RCC_CFGR_Bits;
 
 #endif /* INC_STM32F42XXX_RCC_H_ */

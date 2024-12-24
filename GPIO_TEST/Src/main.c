@@ -25,6 +25,7 @@
 
 void GPIO_Config(GPIO_Config_t *gpio_config);
 void RCC_Config(void);
+void delay(void);
 
 int main(void)
 {
@@ -38,12 +39,15 @@ int main(void)
 
 	while(true) {
 		for(int k = 0; k < 10; k++){
-			for(int i = 0; i < 500; i++)
-				for(int j = 0; j < 500; j++);
+			delay();
 			GPIO_TogglePin(GPIO_PORTG, LED_RED);
 			GPIO_TogglePin(GPIO_PORTG, LED_GREEN);
 		}
 		GPIO_DeInit(&gpiog_config);
+		delay();
+		delay();
+		delay();
+		GPIO_Config(&gpiog_config);
 	}
 }
 
@@ -69,4 +73,9 @@ void GPIO_Config(GPIO_Config_t *gpio_config) {
 	gpio_config->type = push_pull;
 
 	GPIO_Init(GPIO_PORTG, gpio_config);
+}
+
+void delay(void) {
+	for(int i = 0; i < 500; i++)
+		for(int j = 0; j < 500; j++);
 }

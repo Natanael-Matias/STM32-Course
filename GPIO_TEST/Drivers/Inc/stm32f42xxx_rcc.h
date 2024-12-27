@@ -46,8 +46,6 @@ typedef struct {
 	__IO uint32_t PLLI2SCFGR;		/* Offset: 0x84 */
 }RCC_RegTypedef;
 
-#define RCC				((RCC_RegTypedef *) RCC_ADDR_BASE)
-
 typedef union __attribute__((packed)) {
 	struct {
 		bool_t 			hsi_on:			1; /* Internal high-speed clock enable */
@@ -68,25 +66,120 @@ typedef union __attribute__((packed)) {
 		__RO bool_t		pll_sai_rdy:	1; /* PLLSAI clock ready flag */
 		uint8_t			reserved2:		2;
 	};
-	uint32_t rcc_cr_all;
-} RCC_CR_Bits;
+	uint32_t all_bits;
+} CR_Bits;
+
+/********************************************************************************************************/
+
+typedef enum {
+	HSI_osc = 0,
+	HSE_osc,
+	PLL_osc
+}SW_t; /* System clock switch values */
+
+typedef SW_t	SWS_t; /* System clock switch status */
+
+typedef enum {
+	HPRE_noDiv = 0,	HPRE_div2 = 8, HPRE_div4,
+	HPRE_div8, HPRE_div16, HPRE_div64,
+	HPRE_div128, HPRE_div256, HPRE_div512
+}HPRE_t; /* AHB prescaler */
+
+typedef enum {
+	AHB_noDiv = 0,
+	AHB_div2 = 4,
+	AHB_div4,
+	AHB_div8,
+	AHB_div16
+}PPREx_t; /* APB1 (Low speed prescaler) and APB2 (High-speed prescaler) */
+
+typedef enum {
+	HSEdiv2 = 2, HSEdiv3, HSEdiv4, HSEdiv5, HSEdiv6, HSEdiv7, HSEdiv8, HSEdiv9,
+	HSEdiv10, HSEdiv11,	HSEdiv12, HSEdiv13, HSEdiv14, HSEdiv15, HSEdiv16, HSEdiv17,
+	HSEdiv18, HSEdiv19, HSEdiv20, HSEdiv21, HSEdiv22, HSEdiv23, HSEdiv24, HSEdiv25,
+	HSEdiv26, HSEdiv27, HSEdiv28, HSEdiv29, HSEdiv30, HSEdiv31
+} RTCPRE_t; /* HSE division factor for RTC clock */
+
+typedef enum {
+	MCO1_HSI = 0,
+	MCO1_LSE,
+	MCO1_HSE,
+	MCO1_PLL
+} MCO1_t; /* Microcontroller clock output 1 selction */
+
+typedef enum {
+	PLL_I2S = 0,	/*  PLLI2S clock used as I2S clock source */
+	I2S_CKIN		/* External clock mapped on the I2S_CKIN pin used as I2S clock source */
+}I2SSRC_t; /* I2S clock selection source */
+
+typedef enum {
+	MCO_noDiv = 0,
+	MCO_div2 = 4,
+	MCO_div3,
+	MCO_div4,
+	MCO_div5
+} MCOxPRE_t; /* MCOx prescaler */
+
+typedef enum {
+	MCO2_SYSCLK = 0,
+	MCO2_PLLI2S,
+	MCO2_HSE,
+	MCO2_PLL
+}MCO2_t;
 
 typedef union __attribute__((packed)) {
 	struct {
-		uint8_t 		sw:			2; /* System clock switch */
-		__RO uint8_t 	sws:		2; /* System clock switch status */
-		uint8_t 		hpre:		4; /* AHB prescaler */
+		SW_t	 		sw:			2; /* System clock switch */
+		__RO SWS_t 		sws:		2; /* System clock switch status */
+		HPRE_t	 		hpre:		4; /* AHB prescaler */
 		uint8_t 		reserved:	2;
-		uint8_t 		ppre1:		3; /* APB Low speed prescaler (APB1) */
-		uint8_t 		ppre2:		3; /* APB high-speed prescaler (APB2) */
-		uint8_t 		rtc_pre:	5; /* HSE division factor for RTC clock */
-		uint8_t			mco1:		2; /* Microcontroller clock output 1 */
-		bool_t			i2s_sc:		1; /* I2S clock selection */
-		uint8_t			mco1_pre:	3; /* MCO1 prescaler */
-		uint8_t			mco2_pre:	3; /* MCO2 prescaler */
-		uint8_t			mco2:		2; /* Microcontroller clock output 2 */
+		PPREx_t 		ppre1:		3; /* APB Low speed prescaler (APB1) */
+		PPREx_t 		ppre2:		3; /* APB high-speed prescaler (APB2) */
+		RTCPRE_t 		rtc_pre:	5; /* HSE division factor for RTC clock */
+		MCO1_t			mco1:		2; /* Microcontroller clock output 1 */
+		I2SSRC_t		i2s_sc:		1; /* I2S clock selection */
+		MCOxPRE_t		mco1_pre:	3; /* MCO1 prescaler */
+		MCOxPRE_t		mco2_pre:	3; /* MCO2 prescaler */
+		MCO2_t			mco2:		2; /* Microcontroller clock output 2 */
 	};
-	uint32_t rcc_cfgr_all;
-} RCC_CFGR_Bits;
+	uint32_t all_bits;
+} CFGR_Bits;
+
+/********************************************************************************************************/
+
+typedef union __attribute__((packed)) {
+	struct {
+		bool_t tim1_en:		1;	/* TIM1 clock enable */
+		bool_t tim8_en:		1;	/* TIM8 clock enable */
+		uint8_t res0:		2;
+		bool_t usart1_en:	1;	/* USART1 clock enable */
+		bool_t usart6_en:	1;	/* USART6 clock enable */
+		uint8_t res1:		2;
+		bool_t adc1_en:		1;	/* ADC1 clock enable */
+		bool_t adc2_en:		1;	/* ADC2 clock enable */
+		bool_t adc3_en:		1;	/* ADC3 clock enable */
+		bool_t sdio_en:		1;	/* SDIO clock enable */
+		bool_t spi1_en:		1;	/* SPI1 clock enable */
+		bool_t spi4_en:		1;	/* SPI4 clock enable */
+		bool_t syscfg_en:	1;	/* System configuration controller clock enable */
+		bool_t res2:		1;
+		bool_t tim9_en:		1;	/* TIM9 clock enable */
+		bool_t tim10_en:	1;	/* TIM10 clock enable */
+		bool_t tim11_en:	1;	/* TIM11 clock enable */
+		bool_t res3:		1;
+		bool_t spi5_en:		1;	/* SPI5 clock enable */
+		bool_t spi6_en:		1;	/* SPI6 clock enable */
+		bool_t sai1_en:		1;	/* SAI1 clock enable */
+		uint8_t res4:		3;
+		bool_t ltdc_en:		1;	/* LTDC clock enable */
+		uint8_t res5:		5;
+	};
+	uint32_t all_bits;
+} APB2ENR_Bits;
+
+#define RCC					((RCC_RegTypedef *) RCC_ADDR_BASE)
+#define RCC_CR_Bits			((CR_Bits *) 		&RCC->CR)
+#define RCC_CFGR_Bits		((CFGR_Bits *) 		&RCC->CFGR)
+#define RCC_APB2ENR_Bits	((APB2ENR_Bits *)	&RCC->APB2ENR)
 
 #endif /* INC_STM32F42XXX_RCC_H_ */

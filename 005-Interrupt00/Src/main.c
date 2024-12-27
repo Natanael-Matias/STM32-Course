@@ -29,7 +29,7 @@ int main(void)
 	EXTI_IMR_REG |= (1 << 0);
 	EXTI_RTSR_REG |= (1 << 0);	// Rising trigger enabled
 
-	*pNVICIRQEn |= (1 << 6); // Table 62 & 63: Vector table. Position column.
+	*pNVICIRQEn |= (1 << 6); // Table 62: Vector table. Position column.
 
     /* Loop forever */
 	for(;;);

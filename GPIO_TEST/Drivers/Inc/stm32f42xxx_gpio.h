@@ -8,7 +8,6 @@
 #ifndef INC_STM32F42XXX_GPIO_H_
 #define INC_STM32F42XXX_GPIO_H_
 
-#include <stdint.h>
 #include "stm32f42xxx.h"
 #include "stm32f42xxx_rcc.h"
 #include "main.h"
@@ -134,7 +133,7 @@ typedef struct {
 void GPIO_Init(GPIO_Reg_t *pGPIOx, const GPIO_Config_t *pGPIO_Init);
 void GPIO_DeInit(const GPIO_Config_t *pGPIOx);
 
-bool_t GPIO_ReadPin(GPIO_Reg_t *pGPIOx, const GPIO_Pin_t *pGPIO_Pin);
+bool_t GPIO_ReadPin(GPIO_Reg_t *pGPIOx, const GPIO_Pin_t GPIO_Pin);
 uint16_t GPIO_ReadPort(GPIO_Reg_t *pGPIOx);
 void GPIO_WritePin(GPIO_Reg_t *pGPIOx, const GPIO_Pin_t GPIO_Pin, state_t pinValue);
 void GPIO_WritePort(GPIO_Reg_t *pGPIOx, uint16_t portValue);

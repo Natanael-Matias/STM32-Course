@@ -20,8 +20,9 @@
 #include <stm32f42xxx_gpio.h>
 #include "main.h"
 
-#define LED_RED			pin13
-#define LED_GREEN		pin14
+#define LED_RED			pin14
+#define LED_GREEN		pin13
+#define BUTTON			pin0
 
 void GPIO_Config(GPIO_Config_t *gpio_config);
 void RCC_Config(void);
@@ -29,53 +30,62 @@ void delay(void);
 
 int main(void)
 {
-	GPIO_Config_t gpiog_config;
+	GPIO_Config_t gpio_config;
+
+	bool_t flag = false;
 
 	RCC_Config();
-	GPIO_Config(&gpiog_config);
-    /* Loop forever */
-	GPIO_WritePin(GPIO_PORTG, LED_RED, reset);
-	GPIO_WritePin(GPIO_PORTG, LED_GREEN, set);
+	GPIO_Config(&gpio_config);
 
+	//GPIO_WritePin(GPIO_PORTG, LED_RED, reset);
+	//GPIO_WritePin(GPIO_PORTG, LED_GREEN, set);
+
+	/* Loop forever */
 	while(true) {
-		for(int k = 0; k < 10; k++){
-			delay();
+		delay();
+		GPIO_TogglePin(GPIO_PORTG, LED_RED);
+		GPIO_TogglePin(GPIO_PORTG, LED_GREEN);
+		delay();
+		if (GPIO_ReadPin(GPIO_PORTA, BUTTON))
+			flag = true;
+		if (GPIO_ReadPin(GPIO_PORTA, BUTTON) != flag) {
+			flag = false;
+			GPIO_WritePin(GPIO_PORTG, LED_GREEN, set);
 			GPIO_TogglePin(GPIO_PORTG, LED_RED);
-			GPIO_TogglePin(GPIO_PORTG, LED_GREEN);
 		}
-		GPIO_DeInit(&gpiog_config);
-		delay();
-		delay();
-		delay();
-		GPIO_Config(&gpiog_config);
 	}
 }
 
 void RCC_Config(void) {
-	RCC_CR_Bits *cr_bits;
-	RCC_CFGR_Bits *cfgr_bits;
-
-	cr_bits = (RCC_CR_Bits*) &RCC->CR;
-	cfgr_bits = (RCC_CFGR_Bits *) &RCC->CFGR;
-
 	/* RCC CR modify */
-	cr_bits->hse_on = set;
+	RCC_CR_Bits->hse_on = set;
 
-	while(!(cr_bits->hse_rdy)); /* wait for HSE ready */
+	while(!(RCC_CR_Bits->hse_rdy)); /* wait for HSE ready */
 
-	cfgr_bits->sw = set;
+	RCC_CFGR_Bits->sw = HSE_osc;
 }
 
 void GPIO_Config(GPIO_Config_t *gpio_config) {
 	gpio_config->port = gpiog;
-	gpio_config->pin = pin13|pin14;
+	gpio_config->pin = LED_RED|LED_GREEN;
 	gpio_config->mode = output;
 	gpio_config->type = push_pull;
+	gpio_config->pupd = no_pull;
+	gpio_config->speed = medium;
 
 	GPIO_Init(GPIO_PORTG, gpio_config);
+
+	gpio_config->port = gpioa;
+	gpio_config->pin = BUTTON;
+	gpio_config->mode = input;
+	gpio_config->type = push_pull;
+	gpio_config->pupd = no_pull;
+	gpio_config->speed = medium;
+
+	GPIO_Init(GPIO_PORTA, gpio_config);
 }
 
 void delay(void) {
-	for(int i = 0; i < 500; i++)
+	for(int i = 0; i < 250; i++)
 		for(int j = 0; j < 500; j++);
 }

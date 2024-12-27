@@ -59,10 +59,10 @@ void GPIO_DeInit(const GPIO_Config_t *pGPIOx) {
 	GPIO_PORT_RESET(pGPIOx -> port);
 }
 
-bool_t GPIO_ReadPin(GPIO_Reg_t *pGPIOx, const GPIO_Pin_t *pGPIO_Pin) {
+bool_t GPIO_ReadPin(GPIO_Reg_t *pGPIOx, const GPIO_Pin_t GPIO_Pin) {
 	bool_t value;
-	uint16_t temp = *pGPIO_Pin;
-	value = (pGPIOx -> IDR & *pGPIO_Pin) >> SelectPin(&temp);
+	uint16_t temp = GPIO_Pin;
+	value = (pGPIOx -> IDR & GPIO_Pin) >> SelectPin(&temp);
 	return value;
 }
 

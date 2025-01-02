@@ -1,4 +1,6 @@
 "./Drivers/Src/stm32f429xx_gpio.o"
+"./Drivers/Src/stm32f42xxx_exti.o"
+"./Drivers/Src/stm32f42xxx_nvic.o"
 "./Src/main.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"

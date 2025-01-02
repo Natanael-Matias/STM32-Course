@@ -1,6 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
-# Toolchain: GNU Tools for STM32 (12.3.rel1)
+# Toolchain: GNU Tools for STM32 (11.3.rel1)
 ################################################################################
 
 -include ../makefile.init
@@ -60,8 +60,8 @@ all: main-build
 main-build: GPIO_TEST.elf secondary-outputs
 
 # Tool invocations
-GPIO_TEST.elf GPIO_TEST.map: $(OBJS) $(USER_OBJS) C:\Users\natanael.matias\STM32CubeIDE\workspace_1.13.1\STM32-Course\GPIO_TEST\STM32F427ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "GPIO_TEST.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\natanael.matias\STM32CubeIDE\workspace_1.13.1\STM32-Course\GPIO_TEST\STM32F427ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="GPIO_TEST.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+GPIO_TEST.elf GPIO_TEST.map: $(OBJS) $(USER_OBJS) C:\Users\natan\Desktop\Cursos\STM32-Course\GPIO_TEST\STM32F427ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "GPIO_TEST.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\natan\Desktop\Cursos\STM32-Course\GPIO_TEST\STM32F427ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="GPIO_TEST.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

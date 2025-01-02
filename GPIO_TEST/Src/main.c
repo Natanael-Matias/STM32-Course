@@ -18,6 +18,9 @@
 
 #include <stm32f42xxx.h>
 #include <stm32f42xxx_gpio.h>
+#include <stm32f42xxx_syscfg.h>
+#include "stm32f42xxx_exti.h"
+#include "stm32f42xxx_nvic.h"
 #include "main.h"
 
 #define LED_RED			pin14
@@ -26,19 +29,19 @@
 
 void GPIO_Config(GPIO_Config_t *gpio_config);
 void RCC_Config(void);
+void Interrupt(GPIO_EXTI_CONFIG_t *pInterrupt);
+void EXTI0_IRQHandler(void);
 void delay(void);
+
+GPIO_EXTI_CONFIG_t pInterrupt;
 
 int main(void)
 {
 	GPIO_Config_t gpio_config;
 
-	bool_t flag = false;
-
 	RCC_Config();
 	GPIO_Config(&gpio_config);
-
-	//GPIO_WritePin(GPIO_PORTG, LED_RED, reset);
-	//GPIO_WritePin(GPIO_PORTG, LED_GREEN, set);
+	Interrupt(&pInterrupt);
 
 	/* Loop forever */
 	while(true) {
@@ -46,13 +49,6 @@ int main(void)
 		GPIO_TogglePin(GPIO_PORTG, LED_RED);
 		GPIO_TogglePin(GPIO_PORTG, LED_GREEN);
 		delay();
-		if (GPIO_ReadPin(GPIO_PORTA, BUTTON))
-			flag = true;
-		if (GPIO_ReadPin(GPIO_PORTA, BUTTON) != flag) {
-			flag = false;
-			GPIO_WritePin(GPIO_PORTG, LED_GREEN, set);
-			GPIO_TogglePin(GPIO_PORTG, LED_RED);
-		}
 	}
 }
 
@@ -74,15 +70,22 @@ void GPIO_Config(GPIO_Config_t *gpio_config) {
 	gpio_config->speed = medium;
 
 	GPIO_Init(GPIO_PORTG, gpio_config);
+}
 
-	gpio_config->port = gpioa;
-	gpio_config->pin = BUTTON;
-	gpio_config->mode = input;
-	gpio_config->type = push_pull;
-	gpio_config->pupd = no_pull;
-	gpio_config->speed = medium;
+void Interrupt(GPIO_EXTI_CONFIG_t *pInterrupt) {
+	pInterrupt->portPin = gpioa;
+	pInterrupt->line = _L0;
+	pInterrupt->fallingTrigger = reset;
+	pInterrupt->risingTrigger = set;
+	pInterrupt->IRQn = EXTI0;
 
-	GPIO_Init(GPIO_PORTA, gpio_config);
+	GPIO_EXTI_SetInterrupt(pInterrupt);
+}
+
+void EXTI0_IRQHandler(void) {
+	EXTI->PR |= (0x01UL << pInterrupt.line);
+	GPIO_WritePin(GPIO_PORTG, LED_GREEN, set);
+	GPIO_TogglePin(GPIO_PORTG, LED_RED);
 }
 
 void delay(void) {

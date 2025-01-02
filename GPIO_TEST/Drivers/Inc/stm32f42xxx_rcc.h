@@ -44,7 +44,7 @@ typedef struct {
 	__IO uint32_t Reserved6[2];		/* Offset: 0x78 */
 	__IO uint32_t SSCGR;			/* Offset: 0x80 */
 	__IO uint32_t PLLI2SCFGR;		/* Offset: 0x84 */
-}RCC_RegTypedef;
+}RCC_Reg_t;
 
 typedef union __attribute__((packed)) {
 	struct {
@@ -177,7 +177,7 @@ typedef union __attribute__((packed)) {
 	uint32_t all_bits;
 } APB2ENR_Bits;
 
-#define RCC					((RCC_RegTypedef *) RCC_ADDR_BASE)
+#define RCC					((RCC_Reg_t *) RCC_ADDR_BASE)
 #define RCC_CR_Bits			((CR_Bits *) 		&RCC->CR)
 #define RCC_CFGR_Bits		((CFGR_Bits *) 		&RCC->CFGR)
 #define RCC_APB2ENR_Bits	((APB2ENR_Bits *)	&RCC->APB2ENR)
